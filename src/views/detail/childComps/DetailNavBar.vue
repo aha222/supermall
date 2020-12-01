@@ -25,6 +25,7 @@ export default {
     methods: {
         titleClick(index) {
          this.currentIndex = index
+         this.$emit('navBarClick',index)
         },
         backImgClick() {
             this.$router.go(-1)

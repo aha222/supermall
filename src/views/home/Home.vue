@@ -55,7 +55,8 @@ export default {
           isShowBackTop: false,
           tabOffsetTop: 0,
           tabControlShow:false,
-          saveY:0
+          saveY:0,
+          itemImageLoad:null
 
         }
     },
@@ -68,11 +69,12 @@ export default {
     mounted() {
         // 图片上拉加载更多，问题的解决
         const refresh = debounce(this.$refs.scroll.refresh,200)
-        this.$bus.$on('itemImageLoad', () => {
+           this.itemImageLoad = () => {
         // this.$refs.scroll&&this.$refs.scroll.refresh()
         // console.log('--------------')
         refresh()
-    })
+        }
+        this.$bus.$on('itemImageLoad',  this.itemImageLoad)
     },
     activated() {
         this.$refs.scroll.scrollTo(0, this.saveY, 0) 
@@ -80,6 +82,8 @@ export default {
     },
     deactivated() {
         this.saveY = this.$refs.scroll.getScrollY()
+        this.$bus.$off(this.itemImageLoad)
+        // console.log('页面跳转了')
     },
     methods: {
         /* 事件监听有关的方法*/

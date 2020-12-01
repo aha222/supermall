@@ -10,6 +10,7 @@ module.exports = {
         .set('components', resolve('src/components'))
         .set('views', resolve('src/views'))
         .set('network', resolve('src/network'))
+        .set('common', resolve('src/common'))
    
     }
 }
